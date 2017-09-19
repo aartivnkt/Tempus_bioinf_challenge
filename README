@@ -1,0 +1,73 @@
+
+############################# TEMPUS BIOINFORMATICS CHALLENGE #################
+#                                                                             #
+############################# README ########### ##############################
+
+challenge.pl code is written in perl and  annotates variants with annotation information
+pulled from EXAC. 
+
+Run it as perl challenge.pl
+
+The output is Challenge.out file, included in this directory
+
+################## DETAILS OF PERL CODE IMPLEMENTATION AND OUTPUT FILE #########
+
+
+In order to get REST to work, two local modules, REST and
+JSON  have been installed using cpan. 
+
+Commands run for installation of modules from current working directory:
+
+cpan[1]> o conf mbuildpl_arg "--install_base /Users/aartivenkat/Desktop/Tempus_Assignment"
+cpan[2]> o conf makepl_arg "PREFIX=/Users/aartivenkat/Desktop/Tempus_Assignment"
+cpan[3]> install REST::Client
+quit
+
+The same commands were followed for installation of the  JSON package, with the exception of
+install JSON in the cpan[3] step
+
+These modules are then included in the code with the "use lib" command.
+
+For annotation, the following logic was used:
+
+1. Type of variation is pulled from the "TYPE=" field in the VCF. The following order of
+deleteriousness is assumed:
+Indel > deletion > insertion > complex > mnp > snp
+Note that if both insertions and deletions are mentioned in the annotation, they are weighted 
+equally, and a collective annotation called "INDEL" is returned. It is very straightforward to change
+this order if needed, by manipulating the get_most_deleterious_annotation subroutine.
+
+Output with the "TYPE" header in the Challenge.out file
+
+2. Depth of sequence coverage is parsed from the "DP=" field
+
+Output with the "DEPTH" header in the Challenge.out file
+
+3. Number of reads supporting the variant = DP-RO, or the difference between the total depth, "DP=" field 
+computed in 2., and the number of reads supporting the reference reads, which is the "RO" field,
+or reference allele observation count
+
+Output with the "#VARS" header in the Challenge.out file
+
+4. Percentage of reads supporting the reference = RO/DP
+
+Output with the "%REF" header in the Challenge.out file
+
+   Percentage of reads supporting the variant is 1-(Percentage of reads supporting the reference), as computed in 4.
+
+Output with the "%VAR" header in the Challenge.out file
+ 
+5. Allele frequency is obtained from EXAC. 0 is reported if there is no information in EXAC for this variant
+
+Output with the "EXAC_AF" header in the Challenge.out file
+
+6. Additional Information is i) variant ID, which makes it useful to look at this region in a genome browser, or
+pull up relevant information from any other database such as dbSNP; ii) gene annotation info, which reports which genes
+contain this variant
+
+Output with the "EXAC_VAR_ID" and "GENE ANNOTATION" headers in the Challenge.out file
+
+################## DETAILS OF PYTHON CODE IMPLEMENTATION AND OUTPUT FILE ###################
+
+The python code challenge.py has the same structure to the perl code. The only module to install for EXAC connection
+is the requests module, using "pip install requests" command. Run it as python challenge.py 

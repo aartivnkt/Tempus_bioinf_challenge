@@ -1,0 +1,22 @@
+=head2 Wed Sep 13 20:07:43 2017: C<Module> L<REST::Client|REST::Client>
+
+=over 4
+
+=item *
+
+C<installed into: /Users/aartivenkat/Desktop/Tempus_Assignment/lib/perl5/site_perl>
+
+=item *
+
+C<LINKTYPE: dynamic>
+
+=item *
+
+C<VERSION: 273>
+
+=item *
+
+C<EXE_FILES: >
+
+=back
+

@@ -1,0 +1,22 @@
+=head2 Wed Sep 13 20:34:26 2017: C<Module> L<JSON|JSON>
+
+=over 4
+
+=item *
+
+C<installed into: /Users/aartivenkat/Desktop/Tempus_Assignment/JSON/lib/perl5/site_perl>
+
+=item *
+
+C<LINKTYPE: dynamic>
+
+=item *
+
+C<VERSION: 2.94>
+
+=item *
+
+C<EXE_FILES: >
+
+=back
+
